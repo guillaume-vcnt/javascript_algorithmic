@@ -515,98 +515,7 @@ function isSorted(array) {
   return isAscending || isDescending;
 }
 
-//22 - Modifier un tableau existant : Écris une fonction updateArray qui prend deux tableaux en paramètre et retourne un nouveau tableau.
-// - Conserve les éléments présents dans les deux tableaux
-// - Remplace les éléments du tableau B qui n'existent pas dans le tableau A par "delete.{element}"
-// - Ajoute "add.{element}" pour chaque élément du tableau A absent de tableau B
-// - Ajoute "duplicate.{element}" pour chaque doublons du tableau B
-// Exemple : ["banana", "apple", "Kiwi", "duplicate.Kiwi", "delete.Pineapple", "add.Strawberry", "add.Orange"]
-
-const fruitsA = ["banana", "apple", "Strawberry", "Kiwi", "Orange"];
-const fruitsB = ["banana", "apple", "Kiwi", "Kiwi", "Pineapple"];
-
-updateArray(fruitsA, fruitsB);
-
-function updateArray(a, b) {
-  let newArray = [];
-  let seenFruit = [];
-
-  for (let fruit of b) {
-    if (!a.includes(fruit)) {
-      newArray.push(`delete.${fruit}`);
-    } else if (a.includes(fruit)) {
-      newArray.push(fruit);
-    }
-  }
-
-  for (let fruit of a) {
-    if (!b.includes(fruit)) {
-      newArray.push(`add.${fruit}`);
-    }
-  }
-
-  for (let i = 0; i < newArray.length; i++) {
-    if (seenFruit.includes(newArray[i])) {
-      newArray[i] = `duplicate.${newArray[i]}`;
-    } else {
-      seenFruit.push(newArray[i]);
-    }
-  }
-
-  console.log(newArray);
-}
-
-//23 - Détecter les pics et creux dans un tableau : Ecris une fonction capable d'identifier les pics et les creux dans un tableau de nombres. Un pic est un élément du tableau qui est strictement supérieur à ses deux voisins (l'élément avant et l'élément après). Un creux est un élément du tableau qui est strictement inférieur à ses deux voisins.
-//Un pic doit être au moins 5 unités supérieur à ses deux voisins et un creux doit être au moins 5 unités inférieur à ses deux voisins.
-// Le tableau doit contenir au minimum 3 valeurs pour pouvoir comparer un élément à ses deux voisins. Si ce n’est pas le cas, la fonction doit retourner 0.
-
-const numbersA = [10, 18, 4, 17, 6, 16, 2, 15, 4, 14, 3, 16, 2, 18, 8];
-const numbersB = [5, 12, 9, 14, 8, 13, 7, 16, 4, 15, 9, 14, 3, 13, 10];
-const numbersC = [0];
-
-findPeaks(numbersA);
-findPeaks(numbersB);
-findPeaks(numbersC);
-
-function findPeaks(array) {
-  if (array.length < 3) {
-    console.log("Error : Array must contain at least 3 elements.");
-    return 0;
-  }
-
-  let highPeak = [];
-  let lowPeak = [];
-
-  for (let i = 1; i < array.length - 1; i++) {
-    if (array[i] > array[i - 1] + 4 && array[i] > array[i + 1] + 4) {
-      highPeak.push(array[i]);
-    }
-  }
-
-  for (let j = 1; j < array.length - 1; j++) {
-    if (array[j] < array[j - 1] - 4 && array[j] < array[j + 1] - 4) {
-      lowPeak.push(array[j]);
-    }
-  }
-
-  if (highPeak.length === 0) {
-    console.log("No peaks found.");
-  } else {
-    console.log(`Peak value(s) : ${highPeak}`);
-    console.log(`Number of peak value(s) : ${highPeak.length}`);
-  }
-
-  if (lowPeak.length === 0) {
-    console.log("No low found.");
-  } else {
-    console.log(`Low value(s) : ${lowPeak}`);
-    console.log(`Number of low value(s) : ${lowPeak.length}`);
-  }
-
-  console.log("\n ========== \n");
-}
-
-//24 - Une chaîne est un isogramme si aucune lettre ne se répète : Écris une fonction isIsogram(str) qui retourne true si c'est le cas, sinon false.
+//22 - Une chaîne est un isogramme si aucune lettre ne se répète : Écris une fonction isIsogram(str) qui retourne true si c'est le cas, sinon false.
 
 console.log(isIsogram("Luthien")); // true
 console.log(isIsogram("Aragorn")); // fals
@@ -616,7 +525,7 @@ function isIsogram(str) {
   return new Set(lowerStr).size === lowerStr.length;
 }
 
-// 25 - Dans un tableau d'entiers où tous les nombres sont identiques sauf un, retrouve celui qui est différent : Écris une fonction findIntruder qui retourne l'intrus ou null s'il n'y en a pas.
+// 23 - Dans un tableau d'entiers où tous les nombres sont identiques sauf un, retrouve celui qui est différent : Écris une fonction findIntruder qui retourne l'intrus ou null s'il n'y en a pas.
 
 console.log(findIntruder([1, 1, 1, 2, 1, 1]));
 console.log(findIntruder([1, 1, 1, 1, 1, 1]));
@@ -650,7 +559,7 @@ function findIntruder(array) {
   }
 }
 
-// 26 - Trouve la somme des deux plus petits entiers dans un tableau : Écris une fonction findSumOfTwoSmallestNumbers qui retourne la somme des deux plus petits nombres d'un tableau. Retourne null si le tableau contient moins de deux éléments.
+// 24 - Trouve la somme des deux plus petits entiers dans un tableau : Écris une fonction findSumOfTwoSmallestNumbers qui retourne la somme des deux plus petits nombres d'un tableau. Retourne null si le tableau contient moins de deux éléments.
 
 console.log(findSumOfTwoSmallestNumbers([5, 12, 8, 19, 22]));
 
@@ -661,3 +570,35 @@ function findSumOfTwoSmallestNumbers(numbers) {
   const sortedNumbers = numbers.sort((a, b) => a - b);
   return sortedNumbers[0] + sortedNumbers[1];
 }
+
+//25 - Convertir un tableau d’objets : Écris une fonction updateObj qui prend en paramètre un tableau d’objets contenant des personnages et leurs rôles. La fonction doit retourner un objet où chaque clé correspond au nom du personnage et chaque valeur à son rôle.
+
+console.log(updateObj(characters));
+
+const characters = [
+  { name: "Frodo", role: "Ring Bearer" },
+  { name: "Sam", role: "Gardener" },
+  { name: "Legolas", role: "Archer" }
+];
+
+function updateObj(array) {
+  return array.reduce((acc, value) => {
+    acc[value.name] = value.role;
+    return acc;
+  }, {});
+}
+
+//26 - Trouve le nombre manquant : Écris une fonction findMissingNumber qui retourne le nombre manquant d'une séquence contenant des entiers allant de 1 à N. Un seul nombre est manquant dans la séquence.
+//Contraintes : Tu n’as pas le droit d’utiliser sort().
+
+console.log(findMissingNumber([6, 1, 2, 4, 5])); 
+console.log(findMissingNumber([1, 2, 3, 5, 6])); 
+
+function findMissingNumber(array) {
+  const numberSet = new Set(array);
+  const maxNumber = Math.max(...array);
+  for (let i = 1; i <= maxNumber; i++) {
+    if (!numberSet.has(i)) {
+      return i;
+    }
+  }
