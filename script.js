@@ -578,7 +578,7 @@ console.log(updateObj(characters));
 const characters = [
   { name: "Frodo", role: "Ring Bearer" },
   { name: "Sam", role: "Gardener" },
-  { name: "Legolas", role: "Archer" }
+  { name: "Legolas", role: "Archer" },
 ];
 
 function updateObj(array) {
@@ -591,8 +591,8 @@ function updateObj(array) {
 //26 - Trouve le nombre manquant : Écris une fonction findMissingNumber qui retourne le nombre manquant d'une séquence contenant des entiers allant de 1 à N. Un seul nombre est manquant dans la séquence.
 //Contraintes : Tu n’as pas le droit d’utiliser sort().
 
-console.log(findMissingNumber([6, 1, 2, 4, 5])); 
-console.log(findMissingNumber([1, 2, 3, 5, 6])); 
+console.log(findMissingNumber([6, 1, 2, 4, 5]));
+console.log(findMissingNumber([1, 2, 3, 5, 6]));
 
 function findMissingNumber(array) {
   const numberSet = new Set(array);
@@ -602,3 +602,4 @@ function findMissingNumber(array) {
       return i;
     }
   }
+}
